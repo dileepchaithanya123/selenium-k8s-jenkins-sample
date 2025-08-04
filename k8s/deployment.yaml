@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selenium-java-tests
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selenium-java-tests
+  template:
+    metadata:
+      labels:
+        app: selenium-java-tests
+    spec:
+      containers:
+        - name: selenium-java-tests
+          image: yourdockerhub/selenium-k8s-jenkins-sample:latest
+          env:
+            - name: SELENIUM_REMOTE_URL
+              value: "http://selenium-hub.default.svc.cluster.local:4444/wd/hub"
